@@ -16,7 +16,8 @@ public class OrderProducer {
         orderEvent.setOrderId(order.getId());
         orderEvent.setProductId(order.getProductId());
         orderEvent.setQuantity(order.getQuantity());
-        kafkaTemplate.send("stock-update-topic", orderEvent);
+        orderEvent.setStatus("PENDING");
+        kafkaTemplate.send("order-requested", orderEvent);
     }
 
 }

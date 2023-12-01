@@ -6,6 +6,8 @@ import org.sagapattern.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderService {
 
@@ -23,5 +25,9 @@ public class OrderService {
         orderRepository.save(orderToSave);
         orderProducer.sendOrder(orderDto);
         return orderDto;
+    }
+
+    public Optional<Order> getOrder(Long orderId) {
+        return this.orderRepository.findById(orderId);
     }
 }
